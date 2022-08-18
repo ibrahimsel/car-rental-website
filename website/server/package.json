@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
-    "build": "yarn build"
+    "build": "react-scripts build"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,6 +16,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "react-scripts": "5.0.1"
   }
 }
