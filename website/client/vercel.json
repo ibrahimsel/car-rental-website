@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "./server/server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "./frontend/build",
       "use": "@vercel/static"
     }
@@ -14,7 +10,7 @@
   "routes": [
     {
       "src": "/[^.]+",
-      "dest": "./src/index.tsx"
+      "dest": "./client/src/public/index.html"
     }
   ]
 }
