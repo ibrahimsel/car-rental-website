@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "build": "babel src --out-dir build --source-maps=inline --verbose"
   },
   "license": "MIT",
   "dependencies": {
