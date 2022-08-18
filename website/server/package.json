@@ -1,9 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon index.js",
     "build": "babel src --out-dir build --source-maps=inline --verbose"
   },
   "license": "MIT",
