@@ -5,7 +5,7 @@ const {
   setCar,
   updateCar,
   deleteCar,
-} = require('../controllers/carController')
+} = require('../api/cars')
 
 const { protect } = require('../middleware/authMiddleware')
 

@@ -15,8 +15,6 @@ const getCars = asyncHandler(async (req, res) => {
 // @route   POST /api/Cars
 // @access  Private
 const setCar = asyncHandler(async (req, res) => {
-  
-
   const car = await Car.create({
     brand: req.body.brand,
     model: req.body.model,
@@ -34,7 +32,7 @@ const setCar = asyncHandler(async (req, res) => {
 const updateCar = asyncHandler(async (req, res) => {
   const car = await Car.findById(req.params.id)
 
-  if (!Car) {
+  if (!car) {
     res.status(400)
     throw new Error('Car not found')
   }
