@@ -78,7 +78,7 @@ export default function SignUp() {
     }).then((res) => {
       if (res.status === 200) {
         alert("Sign Up successful! Please login with your credentials");
-        navigate("/");
+        navigate("/login");
       }
     }).catch((err) => {
       alert("Sign Up failed. Please try with a different email");
