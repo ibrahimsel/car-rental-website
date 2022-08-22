@@ -31,7 +31,7 @@ interface ITestimonialProps {
 
 function CustomerTestimonial(props: ITestimonialProps) {
   return (
-      <Card sx={{ maxWidth: 450, mx: 10 }}>
+      <Card sx={{ maxWidth: 400, mx: 5 }}>
         <CardActionArea>
           <CardMedia
             component="img"

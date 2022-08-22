@@ -73,7 +73,7 @@ function Home() {
           height: "70vh",
         }}
       >
-        <Grid item xs={3} minWidth={400} my={8}>
+        <Grid item xs={3} minWidth={300} my={8}>
           <CustomerTestimonial
             customerName="Bryan Cranston"
             comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper lectus id nisi varius, vel consequat ex faucibus. Pellentesque enim sem, ornare at bibendum vitae, rutrum et sapien."
@@ -82,7 +82,7 @@ function Home() {
             rating={5}
           />
         </Grid>
-        <Grid item xs={3} minWidth={400} my={8}>
+        <Grid item xs={3} minWidth={300} my={8}>
           <CustomerTestimonial
             customerName="Dwayne Johnson"
             comment="Pellentesque ut libero sit amet massa vehicula pulvinar. Sed pretium ante ac augue auctor tincidunt. Integer lorem lectus, consequat in molestie id, volutpat semper massa."
@@ -91,7 +91,7 @@ function Home() {
             rating={5}
           />
         </Grid>
-        <Grid item xs={3} minWidth={400} my={8}>
+        <Grid item xs={3} minWidth={300} my={8}>
           <CustomerTestimonial
             customerName="Rhea Seehorn"
             comment="Cras sit amet interdum elit. Praesent iaculis malesuada finibus. Sed luctus, enim gravida vulputate laoreet, orci est venenatis nunc, vitae tempus massa nunc et enim."
@@ -100,7 +100,7 @@ function Home() {
             rating={4.5}
           />
         </Grid>
-        <Grid item xs={3} minWidth={400} my={8}>
+        <Grid item xs={3} minWidth={300} my={8}>
           <CustomerTestimonial
             customerName="Keanu Reeves"
             comment="Cras convallis a lectus nec luctus. Quisque pellentesque ante ut ante eleifend consequat. Vivamus commodo massa in nibh varius, a mattis sapien scelerisque."
