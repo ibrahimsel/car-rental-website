@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 
-const pages = ["Home", "Book a car", "Add a car"];
+const pages = ["Home", "View cars", "Add a car"];
 
 const Navbar = () => {
   return (
@@ -36,7 +36,7 @@ const Navbar = () => {
               {pages[0]}
             </Link>
             <Link
-              href="/bookcar"
+              href="/viewcars"
               sx={{
                 textDecoration: "none",
                 color: "inherit",

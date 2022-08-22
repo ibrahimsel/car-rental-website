@@ -42,7 +42,7 @@ function Home() {
             my: "auto",
             border: "1px solid white",
             borderRadius: "2px",
-            padding: 2,
+            padding: 4,
           }}
         >
           <HomePageMainText />
