@@ -69,7 +69,7 @@ export default function SignUp() {
     }
     formBody = formBody.join("&");
 
-    fetch("http://localhost:5000/api/users", {
+    fetch("https://car-rental-website-server.vercel.app/api/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",

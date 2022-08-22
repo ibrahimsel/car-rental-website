@@ -1,35 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography, { TypographyProps } from "@mui/material/Typography";
-import LoginBg from "../assets/images/LoginBg.jpg";
+import Typography from "@mui/material/Typography";
+
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import LoginBackgroundImage from "../../components/LoginBackgroundImage/LoginBackgroundImage";
+import LoginButton from "../../components/LoginButton/LoginButton";
+import Copyright from "../../components/Copyright/Copyright";
 
-function Copyright(props: TypographyProps) {
-  const { color = "text.secondary", ...rest } = props;
-  return (
-    <Typography variant="body2" color={color} align="center" {...rest}>
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        Car Rental
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-export default function SignIn() {
+export default function Login() {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -55,7 +40,7 @@ export default function SignIn() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch("http://localhost:5000/api/users/login", {
+    fetch("https://car-rental-website-server.vercel.app/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -79,18 +64,7 @@ export default function SignIn() {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: `url(${LoginBg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      <LoginBackgroundImage />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
@@ -101,7 +75,7 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -130,24 +104,8 @@ export default function SignIn() {
               autoComplete="current-password"
               onChange={handleChange}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                {/* <Link href="#" variant="body2">
-                  Forgot password?
-                </Link> */}
-              </Grid>
+            <LoginButton />
+            <Grid container justifyContent={"center"}>
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
