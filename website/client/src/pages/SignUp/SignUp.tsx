@@ -75,9 +75,15 @@ export default function SignUp() {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
       body: formBody,
+    }).then((res) => {
+      if (res.status === 200) {
+        alert("Sign Up successful! Please login with your credentials");
+        navigate("/");
+      }
+    }).catch((err) => {
+      alert("Sign Up failed. Please try with a different email");
+      console.log(err);
     });
-    alert("Sign Up successful! Please login with your credentials");
-    navigate("/");
   }
 
   return (
