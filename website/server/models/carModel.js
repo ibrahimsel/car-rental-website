@@ -4,14 +4,9 @@ const carSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "User",
     },
     brand: {
-      type: String,
-      required: true,
-    },
-    model: {
       type: String,
       required: true,
     },
@@ -24,9 +19,9 @@ const carSchema = mongoose.Schema(
       required: true,
     },
   },
-  {
-    timestamps: true,
-  }
+  // {
+  //   timestamps: true,
+  // }
 );
 
 module.exports = mongoose.model("Car", carSchema);

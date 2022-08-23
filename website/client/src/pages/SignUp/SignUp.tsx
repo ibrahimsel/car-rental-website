@@ -1,37 +1,22 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Typography, TypographyProps } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props: TypographyProps) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        Car Rental
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../../components/Copyright/Copyright";
 
 const theme = createTheme();
 
@@ -73,6 +58,8 @@ export default function SignUp() {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
+        'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmRlNTM1ZTYwMDhhMTEwNDE0ZWJmZiIsImlhdCI6MTY2MTI0ODg3MiwiZXhwIjoxNjYzODQwODcyfQ.-JmCUWOEWpiRubQ1R6wYRu208wlm-U3h9xtXUfIondA'
       },
       body: formBody,
     });

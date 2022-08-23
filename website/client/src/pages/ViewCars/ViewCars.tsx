@@ -1,5 +1,5 @@
-function BrowseCars() {
+function ViewCars() {
   return <div></div>;
 }
 
-export default BrowseCars;
+export default ViewCars;

@@ -26,7 +26,7 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newPerson = { ...form };
     let details: any = {
@@ -44,12 +44,15 @@ export default function Login() {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
+        'authorization' : 'Bearer '
       },
       body: formBody,
     })
       .then((res) => {
         if (res.status === 200) {
-          res.json().then((data) => {
+          res.json().then(() => {
+            
             navigate("/home");
           });
         } else {

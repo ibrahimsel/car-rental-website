@@ -2,8 +2,8 @@ const asyncHandler = require('express-async-handler')
 const Car = require('../models/carModel')
 
 // @desc    Get Cars
-// @route   GET /api/Cars
-// @access  Private
+// @route   GET /api/cars
+// @access  Public
 const getCars = asyncHandler(async (req, res) => {
   const cars = await Car.find()
 
@@ -11,22 +11,21 @@ const getCars = asyncHandler(async (req, res) => {
 })
 
 // @desc    Set Car
-// @route   POST /api/Cars
+// @route   POST /api/cars
 // @access  Private
 const setCar = asyncHandler(async (req, res) => {
   const car = await Car.create({
+    user: req.body.user,
     brand: req.body.brand,
-    model: req.body.model,
     year: req.body.year,
     price: req.body.price,
-    user: req.user.id,
   })
 
   res.status(200).json(car)
 })
 
 // @desc    Update Car
-// @route   PUT /api/Cars/:id
+// @route   PUT /api/cars/:id
 // @access  Private
 const updateCar = asyncHandler(async (req, res) => {
   const car = await Car.findById(req.params.id)
