@@ -32,7 +32,7 @@ function AddCar() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch("https://car-rental-website-server-n7nu1kkzj-ibrahimsel.vercel.app/api/cars", {
+    fetch("https://car-rental-website-server.vercel.app/api/cars", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
