@@ -3,6 +3,7 @@ import { useState } from "react";
 import Brand from "../../components/AddCarForm/Brand";
 import Year from "../../components/AddCarForm/Year";
 import Price from "../../components/AddCarForm/Price";
+import Navbar from "../../components/Navbar/Navbar";
 import { Grid, Button, Box } from "@mui/material";
 
 function AddCar() {
@@ -31,12 +32,12 @@ function AddCar() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch("http://localhost:5000/api/cars", {
+    fetch("https://car-rental-website-server-n7nu1kkzj-ibrahimsel.vercel.app/api/cars", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-        'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmRlNTM1ZTYwMDhhMTEwNDE0ZWJmZiIsImlhdCI6MTY2MTI0ODg3MiwiZXhwIjoxNjYzODQwODcyfQ.-JmCUWOEWpiRubQ1R6wYRu208wlm-U3h9xtXUfIondA'
+        'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmRlNTM1ZTYwMDhhMTEwNDE0ZWJmZiIsImlhdCI6MTY2MTM0MTk2OSwiZXhwIjoxNjYzOTMzOTY5fQ.wMEJIiwCT47BcxFtqUqLlI39E1ZS7DvoFPmn57PCGvE'
       },
       body: formBody,
     })
@@ -53,24 +54,28 @@ function AddCar() {
       });
   }
   return (
+   <Grid container>
+    <Navbar />
     <Box component="form" onSubmit={onSubmit}>
-      <Grid container mt={10} ml={10}>
-        <Grid item xs={3}>
-          <Brand />
+      <Grid container mt={10}>
+        <Grid item xs={3} ml={5}>
+          <Brand onChange={handleChange}/>
         </Grid>
-        <Grid item xs={3}>
-          <Year />
+        <Grid item xs={3} ml={5}>
+          <Year onChange={handleChange}/>
         </Grid>
-        <Grid item xs={3}>
-          <Price />
+        <Grid item xs={3} ml={5}>
+          <Price onChange={handleChange}/>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} ml={5}>
           <Button type="submit" variant="contained" sx={{ mr: 10 }}>
             Submit Car
           </Button>
         </Grid>
       </Grid>
     </Box>
+
+   </Grid>
   );
 }
 

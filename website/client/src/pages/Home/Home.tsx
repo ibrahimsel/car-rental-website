@@ -9,7 +9,6 @@ function Home() {
   return (
     <Grid container>
       <Navbar />
-
       <Grid
         container
         sx={{

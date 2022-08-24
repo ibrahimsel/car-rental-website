@@ -8,6 +8,7 @@ const getCars = asyncHandler(async (req, res) => {
   const cars = await Car.find()
 
   res.status(200).json(cars)
+  return cars;
 })
 
 // @desc    Set Car
@@ -72,10 +73,7 @@ const deleteCar = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the Car user
-  if (car.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not authorized')
-  }
+ 
 
   await car.remove()
 

@@ -4,6 +4,7 @@ function Price(props: TextFieldProps) {
     <TextField
     required
     id="price"
+    name="price"
     label="Price $ (Hourly)"
     placeholder="e.g. 30"
     type="number"
