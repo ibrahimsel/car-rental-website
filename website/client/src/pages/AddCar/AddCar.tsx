@@ -32,20 +32,26 @@ function AddCar() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch("http://localhost:5000/api/cars", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-        'Authorization' : `Bearer ${localStorage.getItem('token')}`
-      },
-      body: formBody,
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5000"
+          : "https://car-rental-website-server.vercel.app"
+      }/api/cars`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formBody,
+      }
+    )
       .then((res) => {
         if (res.status === 200) {
           res.json().then(() => {
             console.log("success");
-            
           });
         }
       })
@@ -54,28 +60,27 @@ function AddCar() {
       });
   }
   return (
-   <Grid container>
-    <Navbar />
-    <Box component="form" onSubmit={onSubmit}>
-      <Grid container mt={10}>
-        <Grid item xs={3} ml={5}>
-          <Brand onChange={handleChange}/>
+    <Grid container>
+      <Navbar />
+      <Box component="form" onSubmit={onSubmit}>
+        <Grid container mt={10}>
+          <Grid item xs={3} ml={5}>
+            <Brand onChange={handleChange} />
+          </Grid>
+          <Grid item xs={3} ml={5}>
+            <Year onChange={handleChange} />
+          </Grid>
+          <Grid item xs={3} ml={5}>
+            <Price onChange={handleChange} />
+          </Grid>
+          <Grid item xs={3} ml={5}>
+            <Button type="submit" variant="contained" sx={{ mr: 10 }}>
+              Submit Car
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={3} ml={5}>
-          <Year onChange={handleChange}/>
-        </Grid>
-        <Grid item xs={3} ml={5}>
-          <Price onChange={handleChange}/>
-        </Grid>
-        <Grid item xs={3} ml={5}>
-          <Button type="submit" variant="contained" sx={{ mr: 10 }}>
-            Submit Car
-          </Button>
-        </Grid>
-      </Grid>
-    </Box>
-
-   </Grid>
+      </Box>
+    </Grid>
   );
 }
 
