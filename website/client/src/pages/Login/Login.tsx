@@ -45,7 +45,7 @@ export default function Login() {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-        'authorization' : 'Bearer '
+        'Authorization' : `Bearer ${localStorage.getItem('token')}`
       },
       body: formBody,
     })

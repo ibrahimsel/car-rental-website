@@ -59,7 +59,6 @@ export default function SignUp() {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-        'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmRlNTM1ZTYwMDhhMTEwNDE0ZWJmZiIsImlhdCI6MTY2MTI0ODg3MiwiZXhwIjoxNjYzODQwODcyfQ.-JmCUWOEWpiRubQ1R6wYRu208wlm-U3h9xtXUfIondA'
       },
       body: formBody,
     });
