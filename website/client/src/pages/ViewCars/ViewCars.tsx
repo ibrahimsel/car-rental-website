@@ -9,16 +9,13 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { dev_env } from '../../config/dev_env';
 
-const URL = dev_env.url;
-console.log(URL);
 
 function ViewCars() {
   const [cars, setCars] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get(`${URL}/api/cars`)
+      .get(`${process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://car-rental-website-server.vercel.app/"}/api/cars`)
       .then((res) => {
         setCars(res.data);
       })
