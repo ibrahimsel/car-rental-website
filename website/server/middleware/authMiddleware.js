@@ -20,9 +20,10 @@ const protect = asyncHandler(async (req, res, next) => {
     }
   }
   console.log(token);
+  localStorage.setItem("token", token);
   if (!token) {
     res.status(401);
-    throw new Error("Not authorized, no token");
+    throw new Error("Not authorized, no token. Try to login again");
   }
 });
 

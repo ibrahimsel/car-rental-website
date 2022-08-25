@@ -9,13 +9,16 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { dev_env } from '../../config/dev_env';
+
+const URL = dev_env.url;
+console.log(URL);
 
 function ViewCars() {
-  // get cars from server
   const [cars, setCars] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get("https://car-rental-website-server-n7nu1kkzj-ibrahimsel.vercel.app/api/cars")
+      .get(`${URL}/api/cars`)
       .then((res) => {
         setCars(res.data);
       })
@@ -36,7 +39,7 @@ function ViewCars() {
               >
                 <CardActionArea>
                   <CardContent>
-                    <Typography variant="h5" component="h2">
+                    <Typography variant="h6" component="h4">
                       Brand: {car.brand}
                       <br />
                       Year: {car.year}

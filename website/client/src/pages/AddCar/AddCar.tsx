@@ -32,12 +32,12 @@ function AddCar() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch("https://car-rental-website-server.vercel.app/api/cars", {
+    fetch("http://localhost:5000/api/cars", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-        'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmRlNTM1ZTYwMDhhMTEwNDE0ZWJmZiIsImlhdCI6MTY2MTM0MTk2OSwiZXhwIjoxNjYzOTMzOTY5fQ.wMEJIiwCT47BcxFtqUqLlI39E1ZS7DvoFPmn57PCGvE'
+        'Authorization' : `Bearer ${localStorage.getItem('token')}`
       },
       body: formBody,
     })

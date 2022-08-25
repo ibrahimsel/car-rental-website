@@ -6,7 +6,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import Box from "@mui/material/Box";
-import Fade from "@mui/material/Fade";
 
 const labels: { [index: string]: string } = {
   0.5: "Useless",
