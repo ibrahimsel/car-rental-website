@@ -15,7 +15,7 @@ function ViewCars() {
   const [cars, setCars] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get(`${process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://car-rental-website-server.vercel.app/"}/api/cars`)
+      .get(`${process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://car-rental-website-server.vercel.app"}/api/cars`)
       .then((res) => {
         setCars(res.data);
       })
