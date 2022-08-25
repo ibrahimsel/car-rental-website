@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function ViewCars() {
+  console.log(process.env.NODE_ENV);
   const [cars, setCars] = useState<any[]>([]);
   useEffect(() => {
     axios

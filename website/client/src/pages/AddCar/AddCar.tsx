@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Grid, Button, Box } from "@mui/material";
 
 function AddCar() {
+  console.log(process.env.NODE_ENV);
   const [form, setForm] = useState({
     brand: "",
     year: 0,
