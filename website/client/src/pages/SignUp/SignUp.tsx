@@ -54,16 +54,30 @@ export default function SignUp() {
     }
     formBody = formBody.join("&");
 
-    fetch("https://car-rental-website-server.vercel.app/api/users/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body: formBody,
+    fetch(
+      `${
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5000"
+          : "https://car-rental-website-server.vercel.app"
+      }/api/users`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: formBody,
+      }
+    ).then((res) => {
+      if (res.status === 201) {
+        alert("Successfully registered");
+        navigate("/");
+      } else if (res.status === 400) {
+        alert("Error creating user. Try different email");
+      } else {
+        alert("Unknown error");
+      }
     });
-    alert("Sign Up successful! Please login with your credentials");
-    navigate("/");
   }
 
   return (

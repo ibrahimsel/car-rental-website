@@ -1,29 +1,38 @@
 import Navbar from "../../components/Navbar/Navbar";
 import {
   Button,
-  Grid,
   Card,
   CardActionArea,
   CardContent,
+  Grid,
   Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import axios from "axios";
+
+console.log(process.env.NODE_ENV);
 
 function ViewCars() {
-  console.log(process.env.NODE_ENV);
   const [cars, setCars] = useState<any[]>([]);
+
   useEffect(() => {
-    axios
-      .get(
-        `${
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000"
-            : "https://car-rental-website-server.vercel.app"
-        }/api/cars`
-      )
+    fetch(
+      `${
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5000"
+          : "https://car-rental-website-server.vercel.app"
+      }/api/cars`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
       .then((res) => {
-        setCars(res.data);
+        res.json().then((data) => {
+          setCars(data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +45,7 @@ function ViewCars() {
       <Grid container mt={10} ml={10}>
         {cars.map((car: any) => {
           return (
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <Card
                 sx={{ my: 5, mx: 5, backgroundColor: "black", color: "white" }}
               >
@@ -48,7 +57,17 @@ function ViewCars() {
                       Year: {car.year}
                       <br />
                       Price: {car.price}$<br />
+                      Rental Status: {car.status}
                     </Typography>
+                    <Button
+                      sx={{
+                        mt: 5,
+                      }}
+                      color="inherit"
+                      variant="outlined"
+                    >
+                      Rent
+                    </Button>
                   </CardContent>
                 </CardActionArea>
               </Card>

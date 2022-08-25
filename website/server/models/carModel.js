@@ -18,7 +18,11 @@ const carSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-  },
+    status: {
+      type: String,
+      default: "available",
+    },
+  }
   // {
   //   timestamps: true,
   // }

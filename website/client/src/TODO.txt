@@ -1,0 +1,15 @@
+Oluşturma tarihi: 24/08/2022
+
+- Arabanın kiralanıp kiralanmadığı logici eklenecek
+- View cars tasarımı kodlanacak
+- Add a car tasarımı kodlanacak
+- Home Page responsive olacak
+- Add a car sayfasında Brand ve Year bilgisi textfield yerine autocomplete ile alınacak
+
+
+
+-------------
+TAMAMLANANLAR
+- Fetch api'ye verilen url'ler ortam değişkeni olarak atanacak
+- Login yapısındaki sorunlar çözülecek
+- Logout özelliği eklenecek

@@ -1,7 +1,3 @@
 website/client/node_modules/
-website/client/src/TODO.txt
-website/client/src/config.env
 website/server/node_modules/
 website/server/.env
-website/client/prod.env
-website/client/local.env

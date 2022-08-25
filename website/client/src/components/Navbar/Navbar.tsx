@@ -1,12 +1,15 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+import { AppBar, Box, Button, Container, Link, Toolbar } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const pages = ["Home", "View cars", "Add a car"];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const Logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <AppBar
       position="static"
@@ -19,14 +22,13 @@ const Navbar = () => {
         <Toolbar>
           <Box
             justifyContent={"space-evenly"}
-            sx={{ flexGrow: 1, display: "flex", margin: 2 }}
+            sx={{ flexGrow: 1, display: "flex" }}
           >
             <Link
               href="/home"
               sx={{
                 textDecoration: "none",
                 color: "inherit",
-                marginRight: 2,
                 "&:hover": {
                   opacity: 0.4,
                 },
@@ -40,7 +42,6 @@ const Navbar = () => {
               sx={{
                 textDecoration: "none",
                 color: "inherit",
-                marginRight: 2,
                 "&:hover": {
                   opacity: 0.4,
                 },
@@ -55,7 +56,6 @@ const Navbar = () => {
                 textDecoration: "none",
                 color: "inherit",
                 fontSize: "1.3rem",
-                marginRight: 2,
                 "&:hover": {
                   opacity: 0.4,
                 },
@@ -63,6 +63,9 @@ const Navbar = () => {
             >
               {pages[2]}
             </Link>
+            <Button onClick={Logout} variant="outlined" color="inherit">
+              LOG OUT
+            </Button>
           </Box>
         </Toolbar>
       </Container>

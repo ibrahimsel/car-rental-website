@@ -6,25 +6,28 @@ import Price from "../../components/AddCarForm/Price";
 import Navbar from "../../components/Navbar/Navbar";
 import { Grid, Button, Box } from "@mui/material";
 
+console.log(process.env.NODE_ENV);
+
 function AddCar() {
-  console.log(process.env.NODE_ENV);
   const [form, setForm] = useState({
     brand: "",
     year: 0,
     price: 0,
+    status: "available",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newCar = { ...form };
     let details: any = {
       brand: newCar.brand,
       year: newCar.year,
       price: newCar.price,
+      status: newCar.status,
     };
     let formBody: any = [];
     for (let property in details) {

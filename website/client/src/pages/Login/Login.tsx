@@ -40,25 +40,32 @@ export default function Login() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch("https://car-rental-website-server.vercel.app/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        "Accept": "application/x-www-form-urlencoded;charset=UTF-8",
-        'Authorization' : `Bearer ${localStorage.getItem('token')}`
-      },
-      body: formBody,
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5000"
+          : "https://car-rental-website-server.vercel.app"
+      }/api/users/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: formBody,
+      }
+    )
       .then((res) => {
         if (res.status === 200) {
-          res.json().then(() => {
-            
+          res.json().then((data) => {
+            localStorage.setItem("token", data.token);
             navigate("/home");
           });
         } else {
           alert("Invalid credentials");
         }
       })
+
       .catch((err) => {
         console.log(err);
       });
