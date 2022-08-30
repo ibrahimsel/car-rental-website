@@ -23,9 +23,6 @@ const carSchema = mongoose.Schema(
       default: "available",
     },
   }
-  // {
-  //   timestamps: true,
-  // }
 );
 
 module.exports = mongoose.model("Car", carSchema);

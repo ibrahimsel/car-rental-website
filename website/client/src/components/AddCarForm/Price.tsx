@@ -9,7 +9,7 @@ function Price(props: TextFieldProps) {
     placeholder="e.g. 30"
     type="number"
     onChange={props.onChange}
-    inputProps={{ maxLength: 4 }}
+    inputProps={{ maxLength: 4, min:0 }}
 />
   );
 }

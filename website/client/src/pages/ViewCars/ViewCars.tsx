@@ -1,18 +1,36 @@
 import Navbar from "../../components/Navbar/Navbar";
+import RentBtn from "../../components/RentBtn/RentBtn";
+import DoneBtn from "../../components/DoneBtn/DoneBtn";
+import ICar from "../../interfaces/ICar/ICar";
+import { useState, useEffect } from "react";
+import { styled } from "@mui/system";
 import {
-  Button,
   Card,
   CardActionArea,
   CardContent,
   Grid,
   Typography,
 } from "@mui/material";
-import { useState, useEffect } from "react";
 
-console.log(process.env.NODE_ENV);
+const CarCard = styled(Card)({
+  margin: "3rem",
+  borderRadius: "3px",
+  backgroundColor: "black",
+  color: "white",
+  minWidth: "15rem",
+  fontFamily: "Roboto",
+});
 
 function ViewCars() {
-  const [cars, setCars] = useState<any[]>([]);
+  const [cars, setCars] = useState<ICar[]>([
+    {
+      _id: "",
+      brand: "",
+      price: 0,
+      status: "",
+      year: 0,
+    },
+  ]);
 
   useEffect(() => {
     fetch(
@@ -43,12 +61,10 @@ function ViewCars() {
     <Grid container>
       <Navbar />
       <Grid container mt={10} ml={10}>
-        {cars.map((car: any) => {
+        {cars.map((car) => {
           return (
-            <Grid item xs={6}>
-              <Card
-                sx={{ my: 5, mx: 5, backgroundColor: "black", color: "white" }}
-              >
+            <Grid item xs={12} md={6} lg={4}>
+              <CarCard>
                 <CardActionArea>
                   <CardContent>
                     <Typography variant="h6" component="h4">
@@ -59,18 +75,58 @@ function ViewCars() {
                       Price: {car.price}$<br />
                       Rental Status: {car.status}
                     </Typography>
-                    <Button
-                      sx={{
-                        mt: 5,
+                    <RentBtn
+                      onClick={() => {
+                        let details: any = {
+                          status: "Rented",
+                        };
+                        let formBody: any = [];
+                        for (let property in details) {
+                          let encodedKey = encodeURIComponent(property);
+                          let encodedValue = encodeURIComponent(
+                            details[property]
+                          );
+                          formBody.push(encodedKey + "=" + encodedValue);
+                        }
+                        formBody = formBody.join("&");
+                        fetch(
+                          `${
+                            process.env.NODE_ENV === "development"
+                              ? "http://localhost:5000"
+                              : "https://car-rental-website-server.vercel.app"
+                          }/api/cars/${car._id}`,
+                          {
+                            method: "PUT",
+                            headers: {
+                              "Content-Type":
+                                "application/x-www-form-urlencoded;charset=UTF-8",
+                              Accept:
+                                "application/x-www-form-urlencoded;charset=UTF-8",
+                              Authorization: `Bearer ${localStorage.getItem(
+                                "token"
+                              )}`,
+                            },
+                            body: formBody,
+                          }
+                        )
+                          .then((res) => {
+                            if (res.status === 200) {
+                              res.json().then((data) => {
+                                console.log(car._id);
+                                alert("Car successfully rented");
+                                window.location.reload();
+                              });
+                            }
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
                       }}
-                      color="inherit"
-                      variant="outlined"
-                    >
-                      Rent
-                    </Button>
+                    />
+                    <DoneBtn />
                   </CardContent>
                 </CardActionArea>
-              </Card>
+              </CarCard>
             </Grid>
           );
         })}

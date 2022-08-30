@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import Box from "@mui/material/Box";
+import ITestimonialProps from "../../interfaces/ITestimonialProps/ITestimonialProps";
 
 const labels: { [index: string]: string } = {
   0.5: "Useless",
@@ -20,57 +21,45 @@ const labels: { [index: string]: string } = {
   5: "Excellent+",
 };
 
-interface ITestimonialProps {
-  customerName: string;
-  comment: string;
-  image: string;
-  alt: string;
-  rating: number;
-}
-
 function CustomerTestimonial(props: ITestimonialProps) {
   return (
-      <Card sx={{ maxWidth: 400, mx: 5 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="285"
-            image={props.image}
-            alt={props.alt}
-          />
-          <CardContent
+    <Card sx={{ minWidth: 300, maxWidth: 400, mx: 5 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="285"
+          image={props.image}
+          alt={props.alt}
+        />
+        <CardContent sx={{ height: 250 }}>
+          <Typography gutterBottom variant="h5" component="div">
+            {props.customerName}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {props.comment}
+          </Typography>
+          <Box
             sx={{
-              height: 250,
+              width: 200,
+              display: "flex",
+              alignItems: "center",
+              my: 2,
             }}
           >
-            <Typography gutterBottom variant="h5" component="div">
-              {props.customerName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {props.comment}
-            </Typography>
-            <Box
-              sx={{
-                width: 200,
-                display: "flex",
-                alignItems: "center",
-                my: 2,
-              }}
-            >
-              <Rating
-                name="text-feedback"
-                value={props.rating}
-                readOnly
-                precision={0.5}
-                emptyIcon={
-                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                }
-              />
-              <Box sx={{ ml: 2 }}>{labels[props.rating]}</Box>
-            </Box>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+            <Rating
+              name="text-feedback"
+              value={props.rating}
+              readOnly
+              precision={0.5}
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+            <Box sx={{ ml: 2 }}>{labels[props.rating]}</Box>
+          </Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }
 

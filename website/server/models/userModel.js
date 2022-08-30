@@ -19,10 +19,11 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
+    currentCar: {
+      type: mongoose.Schema.ObjectId,
+      default: null,
+    }
   },
-  {
-    timestamps: true,
-  }
 );
 
 module.exports = mongoose.model("User", userSchema);

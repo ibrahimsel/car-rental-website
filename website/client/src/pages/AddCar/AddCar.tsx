@@ -4,16 +4,36 @@ import Brand from "../../components/AddCarForm/Brand";
 import Year from "../../components/AddCarForm/Year";
 import Price from "../../components/AddCarForm/Price";
 import Navbar from "../../components/Navbar/Navbar";
-import { Grid, Button, Box } from "@mui/material";
-
-console.log(process.env.NODE_ENV);
-
+import SubmitCarBtn from "../../components/AddCarForm/SubmitCarBtn";
+import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
 function AddCar() {
+  const carBrands = [
+    { brand: "Honda" },
+    { brand: "BMW" },
+    { brand: "Audi" },
+    { brand: "Mercedes" },
+    { brand: "Volkswagen" },
+    { brand: "Renault" },
+    { brand: "Ford" },
+    { brand: "Skoda" },
+  ];
+
+  const carYears = [
+    { year: "2021" },
+    { year: "2020" },
+    { year: "2019" },
+    { year: "2018" },
+    { year: "2017" },
+    { year: "2016" },
+    { year: "2015" },
+    { year: "2014" },
+  ];
+
   const [form, setForm] = useState({
     brand: "",
     year: 0,
     price: 0,
-    status: "available",
+    status: "Available",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,8 +74,8 @@ function AddCar() {
     )
       .then((res) => {
         if (res.status === 200) {
-          res.json().then(() => {
-            console.log("success");
+          res.json().then((data) => {
+            alert("Car successfully added");
           });
         }
       })
@@ -68,22 +88,45 @@ function AddCar() {
       <Navbar />
       <Box component="form" onSubmit={onSubmit}>
         <Grid container mt={10}>
-          <Grid item xs={3} ml={5}>
-            <Brand onChange={handleChange} />
+          <Grid item xs={10} ml={5}>
+            <Autocomplete
+              options={carBrands}
+              getOptionLabel={(option) => option.brand}
+              onChange={(event, value: any) => {
+                setForm({ ...form, brand: value.brand });
+              }}
+              renderInput={(params) => (
+                <TextField {...params} required name="brand" label="Brand" />
+              )}
+            />
           </Grid>
-          <Grid item xs={3} ml={5}>
-            <Year onChange={handleChange} />
+        </Grid>
+        <Grid container mt={10}>
+          <Grid item xs={8} lg={12} ml={5}>
+            <Autocomplete
+              options={carYears}
+              getOptionLabel={(option) => option.year}
+              onChange={(event, value: any) => {
+                setForm({ ...form, year: value.year });
+              }}
+              renderInput={(params) => (
+                <TextField {...params} required name="year" label="Year" />
+              )}
+            />
           </Grid>
-          <Grid item xs={3} ml={5}>
+        </Grid>
+        <Grid container mt={10}>
+          <Grid item xs={8} lg={12} ml={5}>
             <Price onChange={handleChange} />
           </Grid>
-          <Grid item xs={3} ml={5}>
-            <Button type="submit" variant="contained" sx={{ mr: 10 }}>
-              Submit Car
-            </Button>
+        </Grid>
+        <Grid container mt={10}>
+          <Grid item xs={8} lg={12} ml={5}>
+            <SubmitCarBtn />
           </Grid>
         </Grid>
       </Box>
+
     </Grid>
   );
 }

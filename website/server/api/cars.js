@@ -42,9 +42,8 @@ const updateCar = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not found");
   }
-
   const updatedCar = await Car.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
+    status: req.body.status,
   });
 
   res.status(200).json(updatedCar);
