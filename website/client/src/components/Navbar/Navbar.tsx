@@ -2,7 +2,7 @@ import { AppBar, Box, Button, Container, Link, Toolbar } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import { styled } from "@mui/system";
 
-const pages = ["Home", "View cars", "Add a car", "Profile"];
+const pages = ["Home", "Add a car", "View cars", "Profile"];
 
 const NavLink = styled(Link)({
   textDecoration: "none",
@@ -17,10 +17,10 @@ const NavLink = styled(Link)({
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const Logout = () => {
+  function Logout() {
     localStorage.removeItem("token");
     navigate("/");
-  };
+  }
 
   return (
     <AppBar
@@ -37,8 +37,8 @@ const Navbar = () => {
             sx={{ flexGrow: 1, display: "flex" }}
           >
             <NavLink href="/home">{pages[0]}</NavLink>
-            <NavLink href="/viewcars">{pages[1]}</NavLink>
-            <NavLink href="/addcar">{pages[2]}</NavLink>
+            <NavLink href="/addcar">{pages[1]}</NavLink>
+            <NavLink href="/viewcars">{pages[2]}</NavLink>
             <NavLink href="/profile">{pages[3]}</NavLink>
             <Button onClick={Logout} variant="outlined" color="inherit">
               LOG OUT

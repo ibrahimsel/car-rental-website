@@ -7,9 +7,9 @@ const RentingDoneBtn = styled(Button)({
     marginLeft: "1rem"
 });
 
-function DoneBtn() {
+function DoneBtn(props: any) {
   return (
-    <RentingDoneBtn color="inherit" variant="outlined">
+    <RentingDoneBtn onClick={props.onClick}  color="inherit" variant="outlined">
         Done
     </RentingDoneBtn>
 

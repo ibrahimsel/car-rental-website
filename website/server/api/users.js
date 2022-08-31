@@ -32,14 +32,16 @@ const registerUser = asyncHandler(async (req, res) => {
     lastName,
     email,
     password: hashedPassword,
+    currentCar: null,
   });
 
   if (user) {
     res.status(201).json({
-      _id: user.id,
+      _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      currentCar: user.currentCar,
       token: generateToken(user._id),
     });
   } else {
@@ -59,6 +61,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
+      _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
@@ -78,6 +81,19 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
+
+
+// @desc    Update user data
+// @route   PUT /api/users/:id
+// @access  Private
+const updateUser = asyncHandler(async (req, res) => {
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    currentCar: req.body.currentCar,
+  });
+
+  res.status(200).json(updatedUser);
+});
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
@@ -87,5 +103,6 @@ const generateToken = (id) => {
 module.exports = {
   registerUser,
   loginUser,
+  updateUser,
   getMe,
 };

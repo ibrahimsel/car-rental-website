@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema(
       required: [true, "Please add a password"],
     },
     currentCar: {
-      type: mongoose.Schema.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       default: null,
     }
   },

@@ -11,6 +11,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import IUserInfo from "../../interfaces/IUserInfo/IUserInfo";
 
 const CarCard = styled(Card)({
   margin: "3rem",
@@ -31,6 +32,13 @@ function ViewCars() {
       year: 0,
     },
   ]);
+  const [userInfo, setUserInfo] = useState<IUserInfo>({
+    _id: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    currentCar: null,
+    });
 
   useEffect(() => {
     fetch(
@@ -52,10 +60,33 @@ function ViewCars() {
           setCars(data);
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .then((res) => {
+        fetch(
+          `${
+            process.env.NODE_ENV === "development"
+              ? "http://localhost:5000"
+              : "https://car-rental-website-server.vercel.app"
+          }/api/users/me`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+          .then((res) => {
+            res.json().then((data) => {
+              setUserInfo(data);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
   }, []);
+  console.log(userInfo);
 
   return (
     <Grid container>
@@ -78,7 +109,10 @@ function ViewCars() {
                     <RentBtn
                       onClick={() => {
                         let details: any = {
-                          status: "Rented",
+                          currentCar:
+                            userInfo.currentCar === null
+                              ? car._id
+                              : userInfo.currentCar,
                         };
                         let formBody: any = [];
                         for (let property in details) {
@@ -94,7 +128,7 @@ function ViewCars() {
                             process.env.NODE_ENV === "development"
                               ? "http://localhost:5000"
                               : "https://car-rental-website-server.vercel.app"
-                          }/api/cars/${car._id}`,
+                          }/api/users/${userInfo._id}`,
                           {
                             method: "PUT",
                             headers: {
@@ -112,9 +146,31 @@ function ViewCars() {
                           .then((res) => {
                             if (res.status === 200) {
                               res.json().then((data) => {
-                                console.log(car._id);
-                                alert("Car successfully rented");
-                                window.location.reload();
+                                fetch(
+                                  `${
+                                    process.env.NODE_ENV === "development"
+                                      ? "http://localhost:5000"
+                                      : "https://car-rental-website-server.vercel.app"
+                                  }/api/users/me`,
+                                  {
+                                    method: "GET",
+                                    headers: {
+                                      "Content-Type": "application/json",
+                                      Accept: "application/json",
+                                      Authorization: `Bearer ${localStorage.getItem(
+                                        "token"
+                                      )}`,
+                                    },
+                                  }
+                                )
+                                  .then((res) => {
+                                    res.json().then((data) => {
+                                      setUserInfo(data);
+                                    });
+                                  })
+                                  .catch((err) => {
+                                    console.log(err);
+                                  });
                               });
                             }
                           })
@@ -123,7 +179,7 @@ function ViewCars() {
                           });
                       }}
                     />
-                    <DoneBtn />
+                      
                   </CardContent>
                 </CardActionArea>
               </CarCard>
@@ -134,5 +190,6 @@ function ViewCars() {
     </Grid>
   );
 }
+
 
 export default ViewCars;

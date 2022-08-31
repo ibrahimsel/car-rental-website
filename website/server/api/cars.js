@@ -1,14 +1,23 @@
 const asyncHandler = require("express-async-handler");
 const Car = require("../models/carModel");
 
+// @desc    Get Car by ID
+// @route   GET /api/cars/:id
+// @access  Private
+const getCarById = asyncHandler(async (req, res) => {
+  const car = await Car.findById(req.params.id);
+  res.status(200).json({
+    data: car,
+  });
+})
+
+
 // @desc    Get Cars
 // @route   GET /api/cars
 // @access  Public
 const getCars = asyncHandler(async (req, res) => {
   const cars = await Car.find();
-
   res.status(200).json(cars);
-  return cars;
 });
 
 // @desc    Set Car
@@ -16,7 +25,6 @@ const getCars = asyncHandler(async (req, res) => {
 // @access  Private
 const setCar = asyncHandler(async (req, res) => {
   const car = await Car.create({
-    user: req.body.user,
     brand: req.body.brand,
     year: req.body.year,
     price: req.body.price,
@@ -66,6 +74,7 @@ const deleteCar = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
+  getCarById,
   getCars,
   setCar,
   updateCar,
