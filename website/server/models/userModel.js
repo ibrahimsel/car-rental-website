@@ -22,7 +22,12 @@ const userSchema = mongoose.Schema(
     currentCar: {
       type: mongoose.Schema.Types.ObjectId,
       default: null,
+    },
+    rentalHistory: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
     }
+
   },
 );
 

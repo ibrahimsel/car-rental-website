@@ -4,6 +4,7 @@ interface IUserInfo {
   firstName: string;
   lastName: string;
   currentCar: any;
+  rentalHistory: any;
 }
 
 export default IUserInfo;

@@ -29,6 +29,7 @@ function Profile() {
     firstName: "",
     lastName: "",
     currentCar: null,
+    rentalHistory: [],
   });
 
   const [car, setCar] = useState<ICar>({
@@ -99,7 +100,7 @@ function Profile() {
     }
   }, [user.currentCar]);
 
-  const carInfoText = () => {
+  const currentCarInfoText = () => {
     if (car.brand) {
       return (
         <Typography variant="h5" component="h2">
@@ -157,14 +158,14 @@ function Profile() {
                   }),
                 }
               ).then((res) => {
-                  res
-                    .json()
-                    .then((data) => {
-                      setCar(data);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
+                res
+                  .json()
+                  .then((data) => {
+                    setCar(data);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               });
             }}
           />
@@ -178,6 +179,7 @@ function Profile() {
       );
     }
   };
+
 
   return (
     <UserInfoContainer>
@@ -201,7 +203,7 @@ function Profile() {
             }}
           >
             <CardActionArea>
-              <CardContent>{carInfoText()}</CardContent>
+              <CardContent>{currentCarInfoText()}</CardContent>
             </CardActionArea>
           </Card>
         </Grid>

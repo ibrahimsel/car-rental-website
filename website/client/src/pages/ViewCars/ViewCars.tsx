@@ -38,6 +38,7 @@ function ViewCars() {
     firstName: "",
     lastName: "",
     currentCar: null,
+    rentalHistory: [],
   });
 
   useEffect(() => {

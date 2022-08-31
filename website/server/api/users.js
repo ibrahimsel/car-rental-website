@@ -81,18 +81,17 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
-
-
-// @desc    Update user data
+// @desc    Update user's current car
 // @route   PUT /api/users/:id
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedData = await User.findByIdAndUpdate(req.params.id, req.body, {
     currentCar: req.body.currentCar,
+    rentalHistory: req.body.rentalHistory,
   });
-
-  res.status(200).json(updatedUser);
+  res.status(200).json(updatedData);
 });
+
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
