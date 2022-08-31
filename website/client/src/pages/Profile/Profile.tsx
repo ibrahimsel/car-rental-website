@@ -37,6 +37,7 @@ function Profile() {
     price: 0,
     status: "",
     year: 0,
+    licensePlate: "",
   });
 
   useEffect(() => {
@@ -65,42 +66,118 @@ function Profile() {
       .catch((err) => {
         console.log(err);
       });
+  }, []);
 
-    }, []);
-
-
-    useEffect(() => {
-      if (user.currentCar) {
-        fetch(
-          `${
-            process.env.NODE_ENV === "development"
-              ? "http://localhost:5000"
-              : "https://car-rental-website-server.vercel.app"
-          }/api/cars/${user.currentCar}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
+  useEffect(() => {
+    if (user.currentCar) {
+      fetch(
+        `${
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:5000"
+            : "https://car-rental-website-server.vercel.app"
+        }/api/cars/${user.currentCar}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+        .then((res) => {
+          if (res.status === 200) {
+            res.json().then((data) => {
+              setCar(data.data);
+              console.log(data);
+            });
           }
-        )
-          .then((res) => {
-            if (res.status === 200) {
-              res.json().then((data) => {
-                setCar(data.data)
-                console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user.currentCar]);
+
+  const carInfoText = () => {
+    if (car.brand) {
+      return (
+        <Typography variant="h5" component="h2">
+          Brand: {car.brand} <br />
+          Year: {car.year} <br />
+          License Plate: {car.licensePlate} <br />
+          <DoneBtn
+            onClick={() => {
+              fetch(
+                `${
+                  process.env.NODE_ENV === "development"
+                    ? "http://localhost:5000"
+                    : "https://car-rental-website-server.vercel.app"
+                }/api/users/${user._id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                  body: JSON.stringify({
+                    currentCar: null,
+                  }),
+                }
+              ).then((res) => {
+                if (res.status === 200) {
+                  res
+                    .json()
+                    .then((data) => {
+                      setUser(data);
+                      alert("You have stopped using your car");
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }
               });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }, [user.currentCar]);
 
-
+              fetch(
+                `${
+                  process.env.NODE_ENV === "development"
+                    ? "http://localhost:5000"
+                    : "https://car-rental-website-server.vercel.app"
+                }/api/cars/${car._id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                  body: JSON.stringify({
+                    status: "Available",
+                  }),
+                }
+              ).then((res) => {
+                  res
+                    .json()
+                    .then((data) => {
+                      setCar(data);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+              });
+            }}
+          />
+        </Typography>
+      );
+    } else {
+      return (
+        <Typography variant="h5" component="h2">
+          You haven't rented a car yet.
+        </Typography>
+      );
+    }
+  };
 
   return (
     <UserInfoContainer>
@@ -116,58 +193,15 @@ function Profile() {
       </Grid>
       <Grid container my={10} mx={10}>
         <Grid item xs={12} mx={"10rem"}>
-          <Card sx={{
-            color: "black",
-          }}>
+          <Card
+            elevation={20}
+            sx={{
+              height: "auto",
+              color: "black",
+            }}
+          >
             <CardActionArea>
-              <CardContent>
-                <Typography variant="h6" component="h4">
-                  {car._id}
-                </Typography>
-                {/* <DoneBtn
-      onClick={() => {
-        let details: any = {
-          currentCar: null,
-        };
-        let formBody: any = [];
-        for (let property in details) {
-          let encodedKey = encodeURIComponent(property);
-          let encodedValue = encodeURIComponent(details[property]);
-          formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-        fetch(
-          `${
-            process.env.NODE_ENV === "development"
-              ? "http://localhost:5000"
-              : "https://car-rental-website-server.vercel.app"
-          }/api/users/${userInfo._id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type":
-                "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: formBody,
-          }
-        )
-          .then((res) => {
-            if (res.status === 200) {
-              res.json().then((data) => {
-                alert("Car successfully returned");
-                setUserInfo(data);
-                window.location.reload();
-              });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }}
-      /> */}
-              </CardContent>
+              <CardContent>{carInfoText()}</CardContent>
             </CardActionArea>
           </Card>
         </Grid>

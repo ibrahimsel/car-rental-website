@@ -22,6 +22,12 @@ const carSchema = mongoose.Schema(
       type: String,
       default: "available",
     },
+    licensePlate: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    
   }
 );
 

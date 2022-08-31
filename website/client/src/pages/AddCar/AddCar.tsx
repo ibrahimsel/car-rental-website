@@ -5,7 +5,9 @@ import Year from "../../components/AddCarForm/Year";
 import Price from "../../components/AddCarForm/Price";
 import Navbar from "../../components/Navbar/Navbar";
 import SubmitCarBtn from "../../components/AddCarForm/SubmitCarBtn";
+import LicensePlate from "../../components/AddCarForm/LicensePlate";
 import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
+
 function AddCar() {
   const carBrands = [
     { brand: "Honda" },
@@ -34,6 +36,7 @@ function AddCar() {
     year: 0,
     price: 0,
     status: "Available",
+    licensePlate: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +51,7 @@ function AddCar() {
       year: newCar.year,
       price: newCar.price,
       status: newCar.status,
+      licensePlate: newCar.licensePlate,
     };
     let formBody: any = [];
     for (let property in details) {
@@ -77,6 +81,12 @@ function AddCar() {
           res.json().then((data) => {
             alert("Car successfully added");
           });
+        } else if (res.status === 400) {
+          res.json().then((data) => {
+            alert(data.message);
+          });
+        } else {
+          alert("Unknown error");
         }
       })
       .catch((err) => {
@@ -122,11 +132,15 @@ function AddCar() {
         </Grid>
         <Grid container mt={10}>
           <Grid item xs={8} lg={12} ml={5}>
+            <LicensePlate onChange={handleChange} />
+          </Grid>
+        </Grid>
+        <Grid container mt={5}>
+          <Grid item xs={8} lg={12} ml={5}>
             <SubmitCarBtn />
           </Grid>
         </Grid>
       </Box>
-
     </Grid>
   );
 }

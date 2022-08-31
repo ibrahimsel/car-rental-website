@@ -9,8 +9,7 @@ const getCarById = asyncHandler(async (req, res) => {
   res.status(200).json({
     data: car,
   });
-})
-
+});
 
 // @desc    Get Cars
 // @route   GET /api/cars
@@ -24,11 +23,26 @@ const getCars = asyncHandler(async (req, res) => {
 // @route   POST /api/cars
 // @access  Private
 const setCar = asyncHandler(async (req, res) => {
+  const { brand, year, price, licensePlate } = req.body;
+
+  if (!brand || !year || !price || !licensePlate) {
+    res.status(400);
+    throw new Error("Please provide all the fields with necessary data");
+  }
+
+  const carExists = await Car.findOne({ licensePlate });
+
+  if (carExists) {
+    res.status(400);
+    throw new Error("This license plate already exists");
+  }
+
   const car = await Car.create({
     brand: req.body.brand,
     year: req.body.year,
     price: req.body.price,
     status: req.body.status,
+    licensePlate: req.body.licensePlate,
   });
 
   res.status(200).json(car);
