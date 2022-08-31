@@ -209,7 +209,5 @@ function Profile() {
     </UserInfoContainer>
   );
 }
-{
-}
 
 export default Profile;
