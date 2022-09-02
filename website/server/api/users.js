@@ -88,6 +88,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const updatedData = await User.findByIdAndUpdate(req.params.id, req.body, {
     currentCar: req.body.currentCar,
     rentalHistory: req.body.rentalHistory,
+    
   });
   res.status(200).json(updatedData);
 });
