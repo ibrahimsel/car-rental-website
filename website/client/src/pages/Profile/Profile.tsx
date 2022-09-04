@@ -181,7 +181,7 @@ function Profile() {
     } else {
       return (
         <Typography variant="h5" component="h2">
-          You haven't rented a car yet.
+          You have no rented car currently
         </Typography>
       );
     }

@@ -2,3 +2,5 @@ website/client/node_modules/
 website/server/node_modules/
 website/server/.env
 TODO.txt
+website/client/.env.local
+website/client/.env.main

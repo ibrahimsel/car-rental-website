@@ -42,20 +42,13 @@ function ViewCars() {
   });
 
   useEffect(() => {
-    fetch(
-      `${
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000"
-          : "https://car-rental-website-server.vercel.app"
-      }/api/cars`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/api/cars`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then((res) => {
         res.json().then((data) => {
           setCars(data);
@@ -119,7 +112,9 @@ function ViewCars() {
                         }
 
                         if (userInfo.currentCar) {
-                          alert("You already have a car rented. Release that car first");
+                          alert(
+                            "You already have a car rented. Release that car first"
+                          );
                           return;
                         }
 
