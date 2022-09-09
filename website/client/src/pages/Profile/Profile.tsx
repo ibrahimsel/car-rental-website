@@ -22,8 +22,6 @@ const UserInfoContainer = styled(Grid)({
   mx: 5,
 });
 
-document.getElementsByTagName("html")[0].style.overflow = "hidden";
-
 function Profile() {
   const [user, setUser] = useState<IUserInfo>({
     _id: "",
@@ -223,7 +221,7 @@ function Profile() {
     <Grid
       sx={{
         overflowX: "hidden",
-        overflowY: "auto",
+        overflowY: "scroll",
       }}
     >
       <Navbar />
