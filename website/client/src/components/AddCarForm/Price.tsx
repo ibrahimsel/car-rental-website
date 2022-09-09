@@ -10,6 +10,10 @@ function Price(props: TextFieldProps) {
       type="number"
       onChange={props.onChange}
       inputProps={{ min: 0, max: 999 }}
+      sx={{
+        width: "100%",
+        marginLeft: "2rem",
+      }}
     />
   );
 }

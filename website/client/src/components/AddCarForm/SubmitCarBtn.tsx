@@ -6,7 +6,9 @@ function SubmitCarBtn() {
     <Button
       type="submit"
       variant="contained"
+      fullWidth
       sx={{
+        marginLeft: "2rem",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

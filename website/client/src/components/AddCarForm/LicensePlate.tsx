@@ -12,6 +12,10 @@ function LicensePlate(props: TextFieldProps) {
       type="string"
       onChange={props.onChange}
       inputProps={{ maxLength: 9 }}
+      sx={{
+        width: "100%",
+        marginLeft: "2rem",
+      }}
     />
   );
 }

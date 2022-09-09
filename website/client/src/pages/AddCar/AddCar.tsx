@@ -96,9 +96,15 @@ function AddCar() {
   return (
     <Grid container>
       <Navbar />
-      <Box component="form" onSubmit={onSubmit}>
+      <Box
+        component="form"
+        onSubmit={onSubmit}
+        sx={{
+          width: "95%",
+        }}
+      >
         <Grid container mt={10}>
-          <Grid item xs={10} ml={5}>
+          <Grid item xs={12}>
             <Autocomplete
               options={carBrands}
               getOptionLabel={(option) => option.brand}
@@ -108,11 +114,15 @@ function AddCar() {
               renderInput={(params) => (
                 <TextField {...params} required name="brand" label="Brand" />
               )}
+              sx={{
+                width: "100%",
+                marginLeft: "2rem",
+              }}
             />
           </Grid>
         </Grid>
         <Grid container mt={10}>
-          <Grid item xs={8} lg={12} ml={5}>
+          <Grid item xs={12}>
             <Autocomplete
               options={carYears}
               getOptionLabel={(option) => option.year}
@@ -122,21 +132,25 @@ function AddCar() {
               renderInput={(params) => (
                 <TextField {...params} required name="year" label="Year" />
               )}
+              sx={{
+                width: "100%",
+                marginLeft: "2rem",
+              }}
             />
           </Grid>
         </Grid>
         <Grid container mt={10}>
-          <Grid item xs={8} lg={12} ml={5}>
+          <Grid item xs={12}>
             <Price onChange={handleChange} />
           </Grid>
         </Grid>
         <Grid container mt={10}>
-          <Grid item xs={8} lg={12} ml={5}>
+          <Grid item xs={12}>
             <LicensePlate onChange={handleChange} />
           </Grid>
         </Grid>
         <Grid container mt={5}>
-          <Grid item xs={8} lg={12} ml={5}>
+          <Grid item xs={12}>
             <SubmitCarBtn />
           </Grid>
         </Grid>

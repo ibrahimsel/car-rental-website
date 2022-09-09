@@ -22,6 +22,8 @@ const UserInfoContainer = styled(Grid)({
   mx: 5,
 });
 
+document.getElementsByTagName("html")[0].style.overflow = "hidden";
+
 function Profile() {
   const [user, setUser] = useState<IUserInfo>({
     _id: "",
@@ -105,8 +107,9 @@ function Profile() {
       return (
         <Typography variant="h6" component="h2">
           <Typography variant="h4" component="h3">
-            Currently rented car
+            Currently Rented Car
             <Divider />
+            <br />
           </Typography>
           Brand: {car.brand} <br />
           Year: {car.year} <br />
@@ -191,10 +194,11 @@ function Profile() {
     if (user.rentalHistory) {
       return (
         <Typography variant="h5" component="h3">
-          The cars you rented previously are: <br />
+          Rental History
           {user.rentalHistory.map((rental) => {
             return (
               <Typography variant="h6" component="h2">
+                <Divider />
                 <br />
                 Brand: {rental.brand} <br />
                 Year: {rental.year} <br />
@@ -216,17 +220,16 @@ function Profile() {
     }
   };
   return (
-    <Grid>
+    <Grid
+      sx={{
+        overflowX: "hidden",
+        overflowY: "auto",
+      }}
+    >
       <Navbar />
       <UserInfoContainer>
-        <Grid sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "alicegray",
-        }} container my={10} mx={10}>
-          <Grid item xs={12}>
+        <Grid container my={10} mx={10}>
+          <Grid item xs={2}>
             <Card
               sx={{
                 width: 300,
@@ -237,6 +240,13 @@ function Profile() {
               <CardActionArea>
                 <CardContent>
                   <Typography variant="h6" component="h4">
+                    Account Details
+                    <Divider
+                      sx={{
+                        backgroundColor: "white",
+                      }}
+                    />
+                    <br />
                     Email: {user.email}
                     <br />
                     Name: {user.firstName} {user.lastName}
@@ -247,11 +257,12 @@ function Profile() {
           </Grid>
         </Grid>
         <Grid container my={10} mx={10}>
-          <Grid item xs={12} mx={"10rem"}>
+          <Grid item xs={12}>
             <Card
-              elevation={20}
+              elevation={3}
               sx={{
                 height: "auto",
+                width: "60rem",
                 color: "black",
               }}
             >
@@ -262,12 +273,14 @@ function Profile() {
           </Grid>
         </Grid>
         <Grid container my={10} mx={10}>
-          <Grid item xs={12} mx={"10rem"}>
+          <Grid item xs={12}>
             <Card
-              elevation={20}
+              elevation={3}
               sx={{
                 height: "auto",
+                width: "60rem",
                 color: "black",
+                backgroundColor: "#fca311",
               }}
             >
               <CardActionArea>

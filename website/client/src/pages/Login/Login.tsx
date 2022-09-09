@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-
 import { useNavigate } from "react-router-dom";
 import LoginBackgroundImage from "../../components/LoginBackgroundImage/LoginBackgroundImage";
 import LoginButton from "../../components/LoginButton/LoginButton";

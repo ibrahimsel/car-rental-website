@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="sticky"
+      position="absolute"
       sx={{
         backgroundColor: "#fff",
         color: "#000",
