@@ -12,12 +12,11 @@ function Home() {
       <Grid
         container
         sx={{
-          height: "94vh",
+          height: "100vh",
           backgroundColor: "#020202",
           color: "white",
         }}
       >
-        {/* Header on the home page */}
         <Grid
           item
           xs={5}
@@ -30,9 +29,6 @@ function Home() {
         >
           <HomePageHeader />
         </Grid>
-        {/* Header on the home page */}
-
-        {/* Info text on the home page */}
         <Grid
           item
           xs={5}
@@ -46,10 +42,7 @@ function Home() {
         >
           <HomePageMainText />
         </Grid>
-        {/* Info text on the home page */}
       </Grid>
-
-      {/* Customer testimonials header */}
       <Grid container sx={{
       }}>
         <Grid
@@ -63,9 +56,6 @@ function Home() {
           <CustomerTestimonialHeader />
         </Grid>
       </Grid>
-      {/* Customer testimonials header */}
-
-      {/* Customer Testimonials */}
       <Grid
         container
         sx={{
@@ -109,7 +99,6 @@ function Home() {
           />
         </Grid>
       </Grid>
-      {/* Customer Testimonials */}
     </Grid>
   );
 }
