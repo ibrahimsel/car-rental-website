@@ -21,7 +21,7 @@ const labels: { [index: string]: string } = {
   5: "Excellent+",
 };
 
-function CustomerTestimonial(props: ITestimonialProps) {
+export default function CustomerTestimonial(props: ITestimonialProps) {
   return (
     <Card sx={{ minWidth: 300, maxWidth: 400, mx: 5 }}>
       <CardActionArea>
@@ -51,6 +51,11 @@ function CustomerTestimonial(props: ITestimonialProps) {
               value={props.rating}
               readOnly
               precision={0.5}
+              sx={{
+                "& .MuiRating-iconFilled": {
+                  color: "gray",
+                },
+              }}
               emptyIcon={
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
@@ -63,4 +68,4 @@ function CustomerTestimonial(props: ITestimonialProps) {
   );
 }
 
-export default CustomerTestimonial;
+

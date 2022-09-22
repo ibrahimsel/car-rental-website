@@ -1,28 +1,12 @@
-import React from "react";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
-import Navbar from "../../components/Navbar/Navbar";
+import { Divider, Grid, Typography, Paper, Container } from "@mui/material";
 import { styled } from "@mui/system";
-import IUserInfo from "../../interfaces/IUserInfo/IUserInfo";
 import ICar from "../../interfaces/ICar/ICar";
+import Navbar from "../../components/Navbar/Navbar";
 import DoneBtn from "../../components/StopRenting/StopRenting";
+import IUserInfo from "../../interfaces/IUserInfo/IUserInfo";
 
-const UserInfoContainer = styled(Grid)({
-  color: "black",
-  height: "100vh",
-  padding: 8,
-  my: 5,
-  mx: 5,
-});
-
-function Profile() {
+export default function Profile() {
   const [user, setUser] = useState<IUserInfo>({
     _id: "",
     email: "",
@@ -99,6 +83,10 @@ function Profile() {
         });
     }
   }, [user.currentCar]);
+
+  const InfoPaper = styled(Paper)({
+    padding: "20px",
+  });
 
   const currentCarInfoText = () => {
     if (car.brand) {
@@ -191,7 +179,7 @@ function Profile() {
   const rentalHistoryText = () => {
     if (user.rentalHistory) {
       return (
-        <Typography variant="h5" component="h3">
+        <Typography variant="h4" component="h3">
           Rental History
           {user.rentalHistory.map((rental) => {
             return (
@@ -203,7 +191,6 @@ function Profile() {
                 License plate: {rental.licensePlate} <br />
                 Price: {rental.price} <br />
                 <br />
-                <Divider />
               </Typography>
             );
           })}
@@ -217,79 +204,29 @@ function Profile() {
       );
     }
   };
+
+
   return (
-    <Grid
-      sx={{
-        overflowX: "hidden",
-        overflowY: "scroll",
-      }}
-    >
+    <Container>
       <Navbar />
-      <UserInfoContainer>
-        <Grid container my={10} mx={10}>
-          <Grid item xs={2}>
-            <Card
-              sx={{
-                width: 300,
-                backgroundColor: "black",
-                color: "white",
-              }}
-            >
-              <CardActionArea>
-                <CardContent>
-                  <Typography variant="h6" component="h4">
-                    Account Details
-                    <Divider
-                      sx={{
-                        backgroundColor: "white",
-                      }}
-                    />
-                    <br />
-                    Email: {user.email}
-                    <br />
-                    Name: {user.firstName} {user.lastName}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
-        <Grid container my={10} mx={10}>
-          <Grid item xs={12}>
-            <Card
-              elevation={3}
-              sx={{
-                height: "auto",
-                width: "60rem",
-                color: "black",
-              }}
-            >
-              <CardActionArea>
-                <CardContent>{currentCarInfoText()}</CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
-        <Grid container my={10} mx={10}>
-          <Grid item xs={12}>
-            <Card
-              elevation={3}
-              sx={{
-                height: "auto",
-                width: "60rem",
-                color: "black",
-                backgroundColor: "#fca311",
-              }}
-            >
-              <CardActionArea>
-                <CardContent>{rentalHistoryText()}</CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
-      </UserInfoContainer>
-    </Grid>
+      <Grid item mt={20}>
+        <InfoPaper>{currentCarInfoText()}</InfoPaper>
+      </Grid>
+      <Grid item mt={10}>
+        <InfoPaper>{rentalHistoryText()}</InfoPaper>
+      </Grid>
+      <Grid item my={10}>
+        <InfoPaper>
+          <Typography variant="h4" component="h5">
+            Personal Information <Divider />
+          </Typography>
+          <Typography variant="h6" component="h5">
+            <br />
+            Name: {user.firstName} {user.lastName} <br />
+            Email: {user.email} <br />
+          </Typography>
+        </InfoPaper>
+      </Grid>
+    </Container>
   );
 }
-
-export default Profile;

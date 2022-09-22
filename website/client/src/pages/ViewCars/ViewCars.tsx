@@ -7,6 +7,7 @@ import {
   Card,
   CardActionArea,
   CardContent,
+  Container,
   Grid,
   Typography,
 } from "@mui/material";
@@ -15,12 +16,12 @@ import IUserInfo from "../../interfaces/IUserInfo/IUserInfo";
 const CarCard = styled(Card)({
   margin: "3rem",
   borderRadius: "3px",
-  backgroundColor: "black",
+  backgroundColor: "#212529",
   color: "white",
   minWidth: "15rem",
 });
 
-function ViewCars() {
+export default function ViewCars() {
   const [cars, setCars] = useState<ICar[]>([
     {
       _id: "",
@@ -61,7 +62,7 @@ function ViewCars() {
           setCars(data);
         });
       })
-      .then((res) => {
+      .then(() => {
         fetch(
           `${
             process.env.NODE_ENV === "development"
@@ -88,16 +89,14 @@ function ViewCars() {
       });
   }, []);
 
-  console.log(userInfo);
-
   return (
-    <Grid container>
+    <Container maxWidth='xl'>
       <Navbar />
-      <Grid container mt={10} ml={10}>
+      <Grid container mt={10} >
         {cars.map((car) => {
           return (
             <Grid item xs={12} md={6} lg={4}>
-              <CarCard>
+              <CarCard elevation={20}>
                 <CardActionArea>
                   <CardContent>
                     <Typography variant="h6" component="h4">
@@ -193,8 +192,6 @@ function ViewCars() {
                           .catch((err) => {
                             console.log(err);
                           });
-
-                        // -------------------
                         let details: any = {
                           currentCar:
                             userInfo.currentCar === null
@@ -273,8 +270,8 @@ function ViewCars() {
           );
         })}
       </Grid>
-    </Grid>
+    </Container>
   );
 }
 
-export default ViewCars;
+

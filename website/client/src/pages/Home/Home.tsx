@@ -1,27 +1,30 @@
+import { Box, Container, Grid } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
-import CustomerTestimonial from "../../components/CustomerTestimonial/CustomerTestimonial";
-import HomePageMainText from "../../components/HomePageMainText/HomePageMainText";
 import HomePageHeader from "../../components/HomePageHeader/HomePageHeader";
+import HomePageMainText from "../../components/HomePageMainText/HomePageMainText";
+import CustomerTestimonial from "../../components/CustomerTestimonial/CustomerTestimonial";
 import CustomerTestimonialHeader from "../../components/CustomerTestimonialHeader/CustomerTestimonialHeader";
-import Grid from "@mui/material/Grid";
 
 function Home() {
   return (
-    <Grid container>
+    <Grid>
       <Navbar />
+      {/* Info about the company */}
       <Grid
         container
         sx={{
           height: "100vh",
-          backgroundColor: "#020202",
-          color: "white",
+          backgroundColor: "#212529",
+          color: "#fff",
         }}
       >
         <Grid
           item
-          xs={5}
+          xs={11}
+          sm={5}
+          mx="auto"
+          my="auto"
           sx={{
-            mx: 10,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -31,11 +34,12 @@ function Home() {
         </Grid>
         <Grid
           item
-          xs={5}
+          xs={11}
+          sm={5}
+          mx="auto"
+          my="auto"
           sx={{
-            mx: 2,
-            my: "auto",
-            border: "1px solid white",
+            border: "1px solid #fff",
             borderRadius: "2px",
             padding: 4,
           }}
@@ -43,26 +47,29 @@ function Home() {
           <HomePageMainText />
         </Grid>
       </Grid>
-      <Grid container sx={{
-      }}>
+
+
+
+      {/* Customer Testimonials */}
+
+      <Grid
+        container>
         <Grid
           item
           xs={12}
+          mx="auto"
+          my="auto"
+          width="100%"
           sx={{
-            borderRadius: "2px",
-            padding: 2,
+            backgroundColor: "#CED4DA",
           }}
-        >
+          >
           <CustomerTestimonialHeader />
+          </Grid>
+            
         </Grid>
-      </Grid>
-      <Grid
-        container
-        sx={{
-          height: "70vh",
-        }}
-      >
-        <Grid item xs={3} minWidth={300} my={8}>
+      <Grid container sx={{ height: "auto", backgroundColor: "#CED4DA" }}>
+        <Grid item xs={12} sm={6} lg={3} minWidth={300} my={6}>
           <CustomerTestimonial
             customerName="Bryan Cranston"
             comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper lectus id nisi varius, vel consequat ex faucibus. Pellentesque enim sem, ornare at bibendum vitae, rutrum et sapien."
@@ -71,7 +78,7 @@ function Home() {
             rating={5}
           />
         </Grid>
-        <Grid item xs={3} minWidth={300} my={8}>
+        <Grid item xs={12} sm={6} lg={3} minWidth={300} my={6}>
           <CustomerTestimonial
             customerName="Dwayne Johnson"
             comment="Pellentesque ut libero sit amet massa vehicula pulvinar. Sed pretium ante ac augue auctor tincidunt. Integer lorem lectus, consequat in molestie id, volutpat semper massa."
@@ -80,7 +87,7 @@ function Home() {
             rating={5}
           />
         </Grid>
-        <Grid item xs={3} minWidth={300} my={8}>
+        <Grid item xs={12} sm={6} lg={3} minWidth={300} my={6}>
           <CustomerTestimonial
             customerName="Rhea Seehorn"
             comment="Cras sit amet interdum elit. Praesent iaculis malesuada finibus. Sed luctus, enim gravida vulputate laoreet, orci est venenatis nunc, vitae tempus massa nunc et enim."
@@ -89,7 +96,7 @@ function Home() {
             rating={4.5}
           />
         </Grid>
-        <Grid item xs={3} minWidth={300} my={8}>
+        <Grid item xs={12} sm={6} lg={3} minWidth={300} my={6}>
           <CustomerTestimonial
             customerName="Keanu Reeves"
             comment="Cras convallis a lectus nec luctus. Quisque pellentesque ante ut ante eleifend consequat. Vivamus commodo massa in nibh varius, a mattis sapien scelerisque."

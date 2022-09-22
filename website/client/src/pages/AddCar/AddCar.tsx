@@ -1,12 +1,10 @@
 import * as React from "react";
 import { useState } from "react";
-import Brand from "../../components/AddCarForm/Brand";
-import Year from "../../components/AddCarForm/Year";
 import Price from "../../components/AddCarForm/Price";
 import Navbar from "../../components/Navbar/Navbar";
 import SubmitCarBtn from "../../components/AddCarForm/SubmitCarBtn";
 import LicensePlate from "../../components/AddCarForm/LicensePlate";
-import { Autocomplete, Box, Button, Grid, TextField } from "@mui/material";
+import { Autocomplete, Box, Container, Grid, TextField, withStyles } from "@mui/material";
 
 function AddCar() {
   const carBrands = [
@@ -93,16 +91,16 @@ function AddCar() {
         console.log(err);
       });
   }
+
   return (
-    <Grid container>
+    <Container>
       <Navbar />
       <Box
         component="form"
         onSubmit={onSubmit}
-        sx={{
-          width: "95%",
-        }}
       >
+
+        {/* Brand Autocomplete Field */}
         <Grid container mt={10}>
           <Grid item xs={12}>
             <Autocomplete
@@ -112,7 +110,8 @@ function AddCar() {
                 setForm({ ...form, brand: value.brand });
               }}
               renderInput={(params) => (
-                <TextField {...params} required name="brand" label="Brand" />
+                <TextField {...params} required name="brand" label="Brand"
+                 />
               )}
               sx={{
                 width: "100%",
@@ -121,6 +120,8 @@ function AddCar() {
             />
           </Grid>
         </Grid>
+
+        {/* Year Autocomplete Field*/}
         <Grid container mt={10}>
           <Grid item xs={12}>
             <Autocomplete
@@ -139,23 +140,30 @@ function AddCar() {
             />
           </Grid>
         </Grid>
+
+        {/* Price Field */}
         <Grid container mt={10}>
           <Grid item xs={12}>
             <Price onChange={handleChange} />
           </Grid>
         </Grid>
+
+        {/* License Plate Field */}
         <Grid container mt={10}>
           <Grid item xs={12}>
             <LicensePlate onChange={handleChange} />
           </Grid>
         </Grid>
+
+        {/* Submit Button */}
         <Grid container mt={5}>
           <Grid item xs={12}>
             <SubmitCarBtn />
           </Grid>
         </Grid>
+
       </Box>
-    </Grid>
+    </Container>
   );
 }
 

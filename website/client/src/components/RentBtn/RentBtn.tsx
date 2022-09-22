@@ -7,9 +7,6 @@ const RentCarBtn = styled(Button)({
 });
 
 function RentBtn(props: any) {
-
-
-
   return (
     <RentCarBtn onClick={props.onClick} color="inherit" variant="outlined">
       Rent

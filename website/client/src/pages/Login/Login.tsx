@@ -72,9 +72,8 @@ export default function Login() {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
       <LoginBackgroundImage />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
         <Box
           sx={{
             my: 8,
@@ -90,7 +89,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate onSubmit={onSubmit} sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

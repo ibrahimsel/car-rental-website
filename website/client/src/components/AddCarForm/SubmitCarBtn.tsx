@@ -1,21 +1,21 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/system";
+
+const StyledButton = styled(Button)({
+  marginLeft: "2rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#000",
+  color: "#fff",
+});
 
 function SubmitCarBtn() {
   return (
-    <Button
-      type="submit"
-      variant="contained"
-      fullWidth
-      sx={{
-        marginLeft: "2rem",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <StyledButton type="submit" variant="contained" fullWidth>
       Submit
-    </Button>
+    </StyledButton>
   );
 }
 
