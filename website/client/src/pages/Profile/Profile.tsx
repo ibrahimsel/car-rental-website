@@ -86,6 +86,8 @@ export default function Profile() {
 
   const InfoPaper = styled(Paper)({
     padding: "20px",
+    backgroundColor: "#6D6A75",
+    color: "white",
   });
 
   const currentCarInfoText = () => {

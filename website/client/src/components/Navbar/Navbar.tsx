@@ -61,7 +61,7 @@ export default function DrawerAppBar(props: any) {
       <AppBar
         component="nav"
         sx={{
-          backgroundColor: "#212529",
+          backgroundColor: "#37323e",
           color: "#fff",
           display: "flex",
           justifyContent: "center",

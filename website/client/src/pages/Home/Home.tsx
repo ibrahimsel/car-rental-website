@@ -14,7 +14,7 @@ function Home() {
         container
         sx={{
           height: "100vh",
-          backgroundColor: "#212529",
+          backgroundColor: "#BFBDC1",
           color: "#fff",
         }}
       >
@@ -48,27 +48,20 @@ function Home() {
         </Grid>
       </Grid>
 
-
-
       {/* Customer Testimonials */}
-
+      <Grid container sx={{ height: "auto", backgroundColor: "#37323e" }}>
       <Grid
-        container>
-        <Grid
           item
           xs={12}
           mx="auto"
           my="auto"
           width="100%"
           sx={{
-            backgroundColor: "#CED4DA",
+            backgroundColor: "#37323e",
           }}
           >
           <CustomerTestimonialHeader />
           </Grid>
-            
-        </Grid>
-      <Grid container sx={{ height: "auto", backgroundColor: "#CED4DA" }}>
         <Grid item xs={12} sm={6} lg={3} minWidth={300} my={6}>
           <CustomerTestimonial
             customerName="Bryan Cranston"

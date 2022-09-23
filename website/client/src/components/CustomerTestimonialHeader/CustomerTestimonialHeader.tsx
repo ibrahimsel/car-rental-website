@@ -5,13 +5,14 @@ import {styled} from '@mui/system'
 const CustomerTestimonialHead = styled(Typography)({
   display: 'flex',
   justifyContent: 'center',
-  marginTop: 20,
+  marginTop: 40,
+  color: '#fff',
 });
 
 function CustomerTestimonialHeader() {
   return (
-    <CustomerTestimonialHead variant='h3'>
-        Our customers absolutely love us
+    <CustomerTestimonialHead variant='h4'>
+        Our customers love us
     </CustomerTestimonialHead>
   )
 }

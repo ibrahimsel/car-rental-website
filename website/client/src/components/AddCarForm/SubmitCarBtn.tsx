@@ -7,8 +7,12 @@ const StyledButton = styled(Button)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "#000",
+  backgroundColor: "#37323e",
   color: "#fff",
+  "&:hover": {
+    backgroundColor: "#37323e",
+    opacity: 0.9,
+  },
 });
 
 function SubmitCarBtn() {

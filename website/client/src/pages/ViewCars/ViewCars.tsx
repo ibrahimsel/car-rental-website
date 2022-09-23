@@ -16,7 +16,7 @@ import IUserInfo from "../../interfaces/IUserInfo/IUserInfo";
 const CarCard = styled(Card)({
   margin: "3rem",
   borderRadius: "3px",
-  backgroundColor: "#212529",
+  backgroundColor: "#6D6A75",
   color: "white",
   minWidth: "15rem",
 });

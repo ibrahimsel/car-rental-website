@@ -4,9 +4,15 @@ import Price from "../../components/AddCarForm/Price";
 import Navbar from "../../components/Navbar/Navbar";
 import SubmitCarBtn from "../../components/AddCarForm/SubmitCarBtn";
 import LicensePlate from "../../components/AddCarForm/LicensePlate";
-import { Autocomplete, Box, Container, Grid, TextField, withStyles } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Container,
+  Grid,
+  TextField,
+} from "@mui/material";
 
-function AddCar() {
+export default function AddCar() {
   const carBrands = [
     { brand: "Honda" },
     { brand: "BMW" },
@@ -93,16 +99,24 @@ function AddCar() {
   }
 
   return (
-    <Container>
+    <Container
+      maxWidth={false}
+      sx={{
+        backgroundColor: "#BFBDC1",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+      }}
+    >
       <Navbar />
-      <Box
-        component="form"
-        onSubmit={onSubmit}
-      >
-
+      <Box component="form" onSubmit={onSubmit}>
         {/* Brand Autocomplete Field */}
-        <Grid container mt={10}>
-          <Grid item xs={12}>
+        <Grid
+          container
+          mt={20}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <Grid item xs={8} my={3}>
             <Autocomplete
               options={carBrands}
               getOptionLabel={(option) => option.brand}
@@ -110,8 +124,7 @@ function AddCar() {
                 setForm({ ...form, brand: value.brand });
               }}
               renderInput={(params) => (
-                <TextField {...params} required name="brand" label="Brand"
-                 />
+                <TextField {...params} required name="brand" label="Brand" />
               )}
               sx={{
                 width: "100%",
@@ -119,11 +132,9 @@ function AddCar() {
               }}
             />
           </Grid>
-        </Grid>
 
-        {/* Year Autocomplete Field*/}
-        <Grid container mt={10}>
-          <Grid item xs={12}>
+          {/* Year Autocomplete Field*/}
+          <Grid item xs={8} my={3}>
             <Autocomplete
               options={carYears}
               getOptionLabel={(option) => option.year}
@@ -131,7 +142,12 @@ function AddCar() {
                 setForm({ ...form, year: value.year });
               }}
               renderInput={(params) => (
-                <TextField {...params} required name="year" label="Year" />
+                <TextField
+                  {...params}
+                  required
+                  name="year"
+                  label="Year"
+                />
               )}
               sx={{
                 width: "100%",
@@ -139,32 +155,24 @@ function AddCar() {
               }}
             />
           </Grid>
-        </Grid>
 
-        {/* Price Field */}
-        <Grid container mt={10}>
-          <Grid item xs={12}>
+          {/* Price Field */}
+          <Grid item xs={8} my={3}>
             <Price onChange={handleChange} />
           </Grid>
-        </Grid>
 
-        {/* License Plate Field */}
-        <Grid container mt={10}>
-          <Grid item xs={12}>
+          {/* License Plate Field */}
+          <Grid item xs={8} my={3}>
             <LicensePlate onChange={handleChange} />
           </Grid>
-        </Grid>
 
-        {/* Submit Button */}
-        <Grid container mt={5}>
-          <Grid item xs={12}>
+          {/* Submit Button */}
+          <Grid item xs={8} my={3}>
             <SubmitCarBtn />
           </Grid>
         </Grid>
-
       </Box>
     </Container>
   );
 }
 
-export default AddCar;

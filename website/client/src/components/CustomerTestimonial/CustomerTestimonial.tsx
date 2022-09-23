@@ -53,7 +53,7 @@ export default function CustomerTestimonial(props: ITestimonialProps) {
               precision={0.5}
               sx={{
                 "& .MuiRating-iconFilled": {
-                  color: "gray",
+                  color: "#DEB841",
                 },
               }}
               emptyIcon={
