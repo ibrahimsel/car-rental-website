@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
@@ -8,16 +7,19 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
 import LoginBackgroundImage from "../../components/LoginBackgroundImage/LoginBackgroundImage";
 import LoginButton from "../../components/LoginButton/LoginButton";
 import Copyright from "../../components/Copyright/Copyright";
+import { useNavigate } from "react-router-dom";
+import { useTomSuspense } from "../../context";
 
 export default function Login() {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const { disabled, tomSuspense } = useTomSuspense();
 
   const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ export default function Login() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newPerson = { ...form };
+    tomSuspense(true);
     let details: any = {
       email: newPerson.email,
       password: newPerson.password,
@@ -39,21 +42,14 @@ export default function Login() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch(
-      `${
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000"
-          : "https://car-rental-website-server.vercel.app"
-      }/api/users/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          Accept: "application/x-www-form-urlencoded;charset=UTF-8",
-        },
-        body: formBody,
-      }
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: formBody,
+    })
       .then((res) => {
         if (res.status === 200) {
           res.json().then((data) => {
@@ -64,7 +60,9 @@ export default function Login() {
           alert("Invalid credentials");
         }
       })
-
+      .finally(() => {
+        tomSuspense(false);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -92,6 +90,7 @@ export default function Login() {
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
+              disabled={disabled}
               required
               fullWidth
               id="email"
@@ -103,6 +102,7 @@ export default function Login() {
             />
             <TextField
               margin="normal"
+              disabled={disabled}
               required
               fullWidth
               name="password"
@@ -112,7 +112,7 @@ export default function Login() {
               autoComplete="current-password"
               onChange={handleChange}
             />
-            <LoginButton />
+            <LoginButton disabled={disabled} />
             <Grid container justifyContent={"center"}>
               <Grid item>
                 <Link href="/signup" variant="body2">

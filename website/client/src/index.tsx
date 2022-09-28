@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { TSuspenseProvider } from "./provider";
 import "./index.css";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
@@ -10,18 +11,20 @@ import * as ReactDOM from "react-dom/client";
 
 const container: Element | DocumentFragment =
   document.getElementById("root") || document.createDocumentFragment();
-  
+
 const root = ReactDOM.createRoot(container);
 
 root.render(
-  <BrowserRouter basename="/">
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/viewcars" element={<ViewCars />} />
-      <Route path="/addcar" element={<AddCar />} />
-      <Route path="/profile" element={<Profile />} />
-    </Routes>
-  </BrowserRouter>
+  <TSuspenseProvider>
+    <BrowserRouter basename="/">
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/viewcars" element={<ViewCars />} />
+        <Route path="/addcar" element={<AddCar />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  </TSuspenseProvider>
 );
