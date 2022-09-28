@@ -4,13 +4,7 @@ import Price from "../../components/AddCarForm/Price";
 import Navbar from "../../components/Navbar/Navbar";
 import SubmitCarBtn from "../../components/AddCarForm/SubmitCarBtn";
 import LicensePlate from "../../components/AddCarForm/LicensePlate";
-import {
-  Autocomplete,
-  Box,
-  Container,
-  Grid,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, Box, Container, Grid, TextField } from "@mui/material";
 
 export default function AddCar() {
   const carBrands = [
@@ -64,22 +58,15 @@ export default function AddCar() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch(
-      `${
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000"
-          : "https://car-rental-website-server.vercel.app"
-      }/api/cars`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          Accept: "application/x-www-form-urlencoded;charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: formBody,
-      }
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/api/cars`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: formBody,
+    })
       .then((res) => {
         if (res.status === 200) {
           res.json().then((data) => {
@@ -142,12 +129,7 @@ export default function AddCar() {
                 setForm({ ...form, year: value.year });
               }}
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  required
-                  name="year"
-                  label="Year"
-                />
+                <TextField {...params} required name="year" label="Year" />
               )}
               sx={{
                 width: "100%",
@@ -175,4 +157,3 @@ export default function AddCar() {
     </Container>
   );
 }
-

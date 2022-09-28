@@ -1,9 +1,20 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-function LoginButton() {
+interface ILoginButton {
+  disabled?: boolean;
+}
+
+function LoginButton(props: ILoginButton) {
+  const { disabled } = props;
   return (
-    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+    <Button
+      disabled={disabled}
+      type="submit"
+      fullWidth
+      variant="contained"
+      sx={{ mt: 3, mb: 2 }}
+    >
       Login
     </Button>
   );
