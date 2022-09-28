@@ -6,3 +6,4 @@ website/client/.env.development
 website/client/.env.production
 website/client/.env.local
 website/client/.env.prod
+website/client/build/*
