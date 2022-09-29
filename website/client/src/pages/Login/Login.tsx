@@ -45,7 +45,7 @@ export default function Login() {
     fetch(
       `${
         process.env.NODE_ENV === "production"
-          ? "https://car-rental-website-delta.vercel.app"
+          ? "https://car-rental-website-server.vercel.app"
           : "http://localhost:5000"
       }/api/users/login`,
       {
