@@ -58,15 +58,22 @@ export default function AddCar() {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    fetch(`${process.env.REACT_APP_API_URL}/api/cars`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        Accept: "application/x-www-form-urlencoded;charset=UTF-8",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: formBody,
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV === "production"
+          ? "https://car-rental-website-server.vercel.app"
+          : "http://localhost:5000"
+      }/api/cars`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formBody,
+      }
+    )
       .then((res) => {
         if (res.status === 200) {
           res.json().then((data) => {
